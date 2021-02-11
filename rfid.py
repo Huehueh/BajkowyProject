@@ -6,9 +6,8 @@ import signal
 class RFIDReader():
     def __init__(self):
         self.reader = SimpleMFRC522()
-        self.currentText = ""
         self.continue_reading = True
-        signal.signal(signal.SIGINT, end_read)
+        signal.signal(signal.SIGINT, self.end_read)
 
     def read(self):
         while self.continue_reading:

@@ -8,6 +8,7 @@ if __name__ == '__main__':
     rfidReader = RFIDReader()
 
     for id in rfidReader.read():
+        print("ID", id)
         audio_filename = config.load(id)
         if audio_filename is not None:
             print(audio_filename)

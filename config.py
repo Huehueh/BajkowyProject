@@ -6,6 +6,8 @@ class ConfigReader:
             self.config = json.load(config_file)
 
     def load(self, input : str):
+        print(input)
+        print("Keys", self.config.keys())
         if input not in self.config.keys():
             return None
         return self.config[input]
