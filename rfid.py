@@ -15,6 +15,7 @@ class RFIDReader:
         self.currentId = 0
         self.newId = 0
         self.ee = ee
+        self.reading = False
 
 
     def start_reading(self):
@@ -27,11 +28,12 @@ class RFIDReader:
     def check_state(self, stop_event : Event):
         while not stop_event.is_set():
             currentTime = time.time()
-            if currentTime - self.timeRead > timeout and self.currentId != 0:
+            if currentTime - self.timeRead > timeout and self.reading:
                 self.ee.emit("pause")
-                self.currentId = 0
+                self.reading = False
             elif self.newId != self.currentId:
                 self.currentId = self.newId
+                self.reading = True
                 self.ee.emit("start", self.currentId)
             time.sleep(1)
 
@@ -47,5 +49,4 @@ class RFIDReader:
         print("Ctrl+C captured, ending read.")
         self.stop_event.set()
         self.thread1.join()
-        self.thread2.join()
         GPIO.cleanup()
