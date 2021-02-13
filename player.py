@@ -16,12 +16,8 @@ class AudioPlayer:
             self.current_audio = audio_filename
             self.audio = self.instance.media_new(self.current_audio)
             self.player.set_media(self.audio)
-            self.playing = True
-            self.player.play()
-        elif not self.playing:
-            self.playing = True
-            self.player.pause()
-
+        self.player.play()
+        self.playing = True
 
     def pause(self):
         if self.playing:

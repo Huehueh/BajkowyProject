@@ -30,6 +30,7 @@ class RFIDReader:
             currentTime = time.time()
             if currentTime - self.timeRead > timeout:
                 self.ee.emit("pause")
+                self.currentId = 0
             elif self.newId != self.currentId:
                 self.currentId = self.newId
                 self.ee.emit("start", self.currentId)
