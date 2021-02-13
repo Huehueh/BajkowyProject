@@ -36,7 +36,7 @@ class RFIDReader:
 
     def read_rfid(self, stop_event : Event):
         while not stop_event.is_set():
-            self.newId, = self.reader.read()
+            self.newId, _ = self.reader.read()
             print(f"ID read: {self.newId}")
             self.timeRead = time.time()
             time.sleep(1)

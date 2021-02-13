@@ -13,7 +13,7 @@ if __name__ == '__main__':
     rfidReader.start_reading()
     signal.signal(signal.SIGINT, exit)
 
-def exit(self, sig, frame):
+def exit(sig, frame):
     print("Ctrl+C captured, ending read.")
     sys.exit()
 
