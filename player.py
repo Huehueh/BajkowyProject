@@ -6,6 +6,7 @@ class AudioPlayer:
         self.player = self.instance.media_player_new()
         self.set_volume(90)
         self.current_audio = ""
+        self.playing = False
 
     def set_volume(self, volume):
         vlc.libvlc_audio_set_volume(self.player, volume)
@@ -15,7 +16,10 @@ class AudioPlayer:
             self.current_audio = audio_filename
             self.audio = self.instance.media_new(self.current_audio)
             self.player.set_media(self.audio)
+        self.playing = True
         self.player.play()
 
     def pause(self):
-        self.player.pause()
+        if self.playing:
+            self.player.pause()
+            self.playing = False

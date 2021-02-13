@@ -15,7 +15,6 @@ class RFIDReader:
         self.currentId = 0
         self.newId = 0
         self.ee = ee
-        self.reading = False
 
 
     def start_reading(self):
@@ -25,15 +24,14 @@ class RFIDReader:
         self.thread1.start()
         self.thread2.start()
 
+
     def check_state(self, stop_event : Event):
         while not stop_event.is_set():
             currentTime = time.time()
-            if currentTime - self.timeRead > timeout and self.reading:
+            if currentTime - self.timeRead > timeout:
                 self.ee.emit("pause")
-                self.reading = False
             elif self.newId != self.currentId:
                 self.currentId = self.newId
-                self.reading = True
                 self.ee.emit("start", self.currentId)
             time.sleep(1)
 
