@@ -14,7 +14,7 @@ if __name__ == '__main__':
 @ee.on("start")
 def start(id):
     print("Start called", id)
-    audio_filename = config.load(id)
+    audio_filename = config.load(str(id))
     if audio_filename is not None:
         print(audio_filename)
         player.play(audio_filename)
