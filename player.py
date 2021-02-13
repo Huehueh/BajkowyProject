@@ -16,6 +16,7 @@ class AudioPlayer:
             self.current_audio = audio_filename
             self.audio = self.instance.media_new(self.current_audio)
             self.player.set_media(self.audio)
+            print(f"Starting to play {self.current_audio}")
         self.player.play()
         self.playing = True
 

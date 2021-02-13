@@ -6,8 +6,7 @@ class ConfigReader:
             self.config = json.load(config_file)
 
     def load(self, input : str) -> str:
-        print(f"Loading id {input}", end=' ')
-        print("Keys", self.config.keys())
+        print(f"Loading song for id {input}...", end=' ')
         if input not in self.config.keys():
             print("failed")
             return None

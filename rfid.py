@@ -1,7 +1,6 @@
 import time, sys
 from mfrc522 import SimpleMFRC522
 import RPi.GPIO as GPIO
-import signal
 from threading import Thread, Lock, Event
 from pymitter import EventEmitter
 
@@ -10,7 +9,6 @@ timeout=2
 class RFIDReader:
     def __init__(self, ee : EventEmitter):
         self.reader = SimpleMFRC522()
-        signal.signal(signal.SIGINT, self.end_read)
         self.timeRead = 0
         self.currentId = 0
         self.newId = 0
@@ -38,14 +36,8 @@ class RFIDReader:
 
     def read_rfid(self, stop_event : Event):
         while not stop_event.is_set():
-            id, text = self.reader.read()
-            print("ID: %s\nText: %s" % (id, text))
-            self.newId = id
+            self.newId, = self.reader.read()
+            print(f"ID read: {self.newId}")
             self.timeRead = time.time()
             time.sleep(1)
 
-    def end_read(self, sig, frame):
-        print("Ctrl+C captured, ending read.")
-        self.stop_event.set()
-        self.thread1.join()
-        GPIO.cleanup()
