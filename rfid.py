@@ -17,7 +17,7 @@ class RFIDReader:
 
     def start_reading(self):
         self.stop_event = Event()
-        self.thread1 = Thread(target=self.read_rfid, args=[self.stop_event])
+        self.thread1 = Thread(target=self.read_rfid_until_stop, args=[self.stop_event])
         self.thread2 = Thread(target=self.check_state, args=[self.stop_event])
         self.thread1.start()
         self.thread2.start()
@@ -34,9 +34,10 @@ class RFIDReader:
                 self.ee.emit("start", self.currentId)
             time.sleep(1)
 
-    def read_rfid(self, stop_event : Event):
+
+    def read_rfid_until_stop(self, stop_event : Event):
         while not stop_event.is_set():
-            self.newId, _ = self.reader.read()
+            self.newId = self.read_rfid()
             print(f"ID read: {self.newId}")
             self.timeRead = time.time()
             time.sleep(1)
