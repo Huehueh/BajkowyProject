@@ -7,7 +7,7 @@ from pymitter import EventEmitter
 timeout=1.5
 
 class RFIDReader:
-    def __init__(self, ee : EventEmitter):
+    def __init__(self, ee : EventEmitter = None):
         self.reader = SimpleMFRC522()
         self.timeRead = 0
         self.currentId = 0
@@ -36,7 +36,7 @@ class RFIDReader:
 
     def read_rfid(self) -> str:
         id, _ = self.reader.read()
-        return id
+        return str(id)
 
 
     def read_rfid_until_stop(self, stop_event : Event):
