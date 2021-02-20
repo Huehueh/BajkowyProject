@@ -4,7 +4,7 @@ import RPi.GPIO as GPIO
 from threading import Thread, Lock, Event
 from pymitter import EventEmitter
 
-timeout=2
+timeout=1.5
 
 class RFIDReader:
     def __init__(self, ee : EventEmitter):
@@ -32,7 +32,11 @@ class RFIDReader:
             elif self.newId != self.currentId:
                 self.currentId = self.newId
                 self.ee.emit("start", self.currentId)
-            time.sleep(1)
+            time.sleep(timeout/3)
+
+    def read_rfid(self) -> str:
+        id, _ = self.reader.read()
+        return id
 
 
     def read_rfid_until_stop(self, stop_event : Event):
@@ -40,5 +44,5 @@ class RFIDReader:
             self.newId = self.read_rfid()
             print(f"ID read: {self.newId}")
             self.timeRead = time.time()
-            time.sleep(1)
+            time.sleep(timeout/3)
 

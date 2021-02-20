@@ -3,7 +3,7 @@ from rfid import RFIDReader
 
 app = Flask(__name__)
 
-@app.route("/read_rfid")
+@app.route("/read_rfid", methods=['GET'])
 def rfid():
     reader = RFIDReader()
     return reader.read_rfid()
