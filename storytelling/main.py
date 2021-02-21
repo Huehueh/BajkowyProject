@@ -6,7 +6,7 @@ import signal
 import sys
 
 if __name__ == '__main__':
-    config = ConfigReader('config.json')
+    config = ConfigReader()
     player = AudioPlayer()
     ee = EventEmitter()
     rfidReader = RFIDReader()

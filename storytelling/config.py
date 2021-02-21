@@ -1,15 +1,15 @@
 import json, os
 
-SOUND_DIR = "sound_directory"
+SOUND_DIR = 'sound_directory'
+CONFIG_NAME = 'config.json'
 
 class ConfigReader:
-    def __init__(self, config_filename : str):
-        self.config_filename = config_filename
-        with open(self.config_filename, 'r') as config_file:
+    def __init__(self):
+        with open(CONFIG_NAME, 'r') as config_file:
             self.config = json.load(config_file)
 
     def save_config(self):
-        with open(self.config_filename, 'w') as config_file:
+        with open(CONFIG_NAME, 'w') as config_file:
             json.dump(self.config, config_file)
 
     def set_sound_directory(self, directory : str):
