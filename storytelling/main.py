@@ -20,7 +20,7 @@ def exit(sig, frame):
 @ee.on("start")
 def start(id : str):
     print("Start called", id)
-    audio_filename = config.load(id)
+    audio_filename = config.get_song_for_id_full_path(id)
     if audio_filename is not None:
         player.play(audio_filename)
 
