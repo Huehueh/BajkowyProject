@@ -9,8 +9,8 @@ if __name__ == '__main__':
     config = ConfigReader('config.json')
     player = AudioPlayer()
     ee = EventEmitter()
-    rfidReader = RFIDReader(ee)
-    rfidReader.start_reading()
+    rfidReader = RFIDReader()
+    rfidReader.start_reading(ee)
     signal.signal(signal.SIGINT, exit)
 
 def exit(sig, frame):
@@ -18,9 +18,9 @@ def exit(sig, frame):
     sys.exit()
 
 @ee.on("start")
-def start(id):
+def start(id : str):
     print("Start called", id)
-    audio_filename = config.load(str(id))
+    audio_filename = config.load(id)
     if audio_filename is not None:
         player.play(audio_filename)
 
