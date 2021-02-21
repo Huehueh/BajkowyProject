@@ -28,9 +28,9 @@ def upload_sound():
     uploaded_file = request.files['file']
     if uploaded_file.filename != '':
         print("PliczeK", uploaded_file.filename)
-        uploaded_file.save(os.path.join(app.config['UPLOAD_PATH', uploaded_file.filename))
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], uploaded_file.filename)
+        uploaded_file.save(filepath)
     return redirect(url_for('index'))
-    #
 
 @app.route('/uploads/<filename>')
 def upload(filename):
