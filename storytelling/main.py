@@ -1,6 +1,6 @@
-from config import ConfigReader
-from player import AudioPlayer
-from rfid import RFIDReader
+from storytelling.config import ConfigReader
+from storytelling.player import AudioPlayer
+from storytelling.rfid import RFIDReader
 from pymitter import EventEmitter
 import signal
 import sys

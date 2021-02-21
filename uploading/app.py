@@ -1,5 +1,5 @@
-from flask import Flask, render_template
-from rfid import RFIDReader
+from flask import Flask
+from storytelling.rfid import RFIDReader
 
 app = Flask(__name__)
 reader = None

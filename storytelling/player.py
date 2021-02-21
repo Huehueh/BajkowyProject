@@ -2,9 +2,10 @@ import vlc
 
 class AudioPlayer:
     def __init__(self):
-        self.instance = vlc.Instance('--aout=alsa')
-        self.player = self.instance.media_player_new()
-        self.set_volume(90)
+        self.vlc_instance = vlc.Instance('--aout=alsa')
+        self.player = self.vlc_instance.media_player_new()
+        #TODO: add looping
+        self.set_volume(100)
         self.current_audio = ""
         self.playing = False
 
@@ -14,7 +15,7 @@ class AudioPlayer:
     def play(self, audio_filename):
         if self.current_audio is not audio_filename:
             self.current_audio = audio_filename
-            self.audio = self.instance.media_new(self.current_audio)
+            self.audio = self.vlc_instance.media_new(self.current_audio)
             self.player.set_media(self.audio)
             print(f"Starting to play {self.current_audio}")
         self.player.play()
