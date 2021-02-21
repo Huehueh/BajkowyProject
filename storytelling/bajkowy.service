@@ -1,0 +1,14 @@
+
+[Unit]
+Description=Story-teller
+
+[Service]
+User=pi
+WorkingDirectory=/home/pi/BajkowyProject/storytelling/
+Environment="PATH=/home/pi/BajkowyProject/venv/bin"
+Environment="PYTHONPATH=/home/pi/BajkowyProject"
+ExecStart=/home/pi/BajkowyProject/venv/bin/python main.py
+
+[Install]
+WantedBy=multi-user.target
+

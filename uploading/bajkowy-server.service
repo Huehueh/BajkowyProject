@@ -1,0 +1,14 @@
+[Unit]
+Description=uWSGI instance to serve bajkowy server
+After=network.target
+
+[Service]
+User=pi
+Group=www-data
+WorkingDirectory=/home/pi/BajkowyProject/uploading/
+Environment="PATH=/home/pi/BajkowyProject/venv/bin"
+Environment="PYTHONPATH=/home/pi/BajkowyProject"
+ExecStart=/home/pi/BajkowyProject/venv/bin/uwsgi --ini bajkowy.ini
+
+[Install]
+WantedBy=multi-user.target
