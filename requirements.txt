@@ -1,0 +1,6 @@
+wheel
+uwsgi
+flask
+mfrc522
+pymitter
+python-vlc
