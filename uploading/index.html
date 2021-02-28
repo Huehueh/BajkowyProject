@@ -6,16 +6,16 @@
     <script type="text/javascript" src="bajkowy-functions.js"></script>
 </head>
 <body>
-    <h1> Hello ciućmoki!!</h1>
-    <p> co ja tu robiem....</p>
     <button onclick="ReadRfid()">Read rfid!</button>
+
     <div id="rfid_response"></div>
 
-<!--    <input id="sound_uploader" type="file" onchange="UploadSound(this)">-->
-    <form method="POST" action="" enctype="multipart/form-data">
-      <p><input type="file" name="sound_file" accept=".mp3"></p>
+    <form method="POST" action="/hue/upload_file" enctype="multipart/form-data">
+      <p><input type="file" name="file" accept=".mp3"></p>
       <p><input type="submit" value="Submit"></p>
     </form>
+
     <div id="sound_name"></div>
+
 </body>
 </html>

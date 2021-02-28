@@ -8,6 +8,7 @@ configReader = ConfigReader()
 app.config['UPLOAD_FOLDER'] = configReader.get_sound_directory()
 app.config['UPLOAD_EXTENSIONS'] = ['.mp3']
 app.config['UPLOAD_PATH'] = 'uploads'
+app.config['MAX_CONTENT_PATH'] = 100000000
 reader = None
 id = None
 
@@ -23,19 +24,16 @@ def rfid():
     id = reader.read_id()
     return id
 
-@app.route('/', methods='POST')
+@app.route('/upload_file', methods=['GET', 'POST'])
 def upload_sound():
-    uploaded_file = request.files['file']
-    if uploaded_file.filename != '':
-        print("PliczeK", uploaded_file.filename)
+    if request.method == 'POST':
+        uploaded_file = request.files['file']
+        print("upload folder", app.config['UPLOAD_FOLDER'])
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], uploaded_file.filename)
+        print("Zapisuje plik", filepath)
         uploaded_file.save(filepath)
-    return redirect(url_for('index'))
+    return f"wrzucono {uploaded_file.filename}"
 
-@app.route('/uploads/<filename>')
-def upload(filename):
-    configReader.add_song(id, filename)
-    return send_from_directory(app.config['UPLOAD_PATH'], filename)
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
