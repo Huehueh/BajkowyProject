@@ -1,10 +1,13 @@
 from flask import Flask, request, redirect, url_for, send_from_directory
 from storytelling.rfid import RFIDReader
 from storytelling.config import ConfigReader
+from uploading.manager import BajkowyManager
 import os
+
 
 app = Flask(__name__)
 configReader = ConfigReader()
+bajkowyManager = BajkowyManager()
 app.config['UPLOAD_FOLDER'] = configReader.get_sound_directory()
 app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024
 reader = None
@@ -16,8 +19,11 @@ def init_rfid_reader():
 
 @app.route("/read_rfid", methods=['GET'])
 def read_rfid():
+    bajkowyManager.stop()
     init_rfid_reader()
-    return reader.read_id()
+    id = reader.read_id()
+    bajkowyManager.start()
+    return id
 
 @app.route('/upload_file', methods=['POST'])
 def upload_sound():
@@ -32,7 +38,7 @@ def upload_sound():
                 print("Saving file", filepath)
                 uploaded_file.save(filepath)
 
-                return f"Wrzucono {id} {filename}"
+                return f"Wrzucono {id} - {filename}"
     return "Nie wrzucono pliku"
 
 
