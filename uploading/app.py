@@ -25,11 +25,10 @@ def upload_sound():
         uploaded_file = request.files['file']
         filename = uploaded_file.filename
         if filename != '':
-            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-
             id = request.form["rfid_response"]
             validId = configReader.add_song(id, filename)
             if validId:
+                filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
                 print("Saving file", filepath)
                 uploaded_file.save(filepath)
 
