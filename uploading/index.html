@@ -6,7 +6,7 @@
     <script type="text/javascript" src="bajkowy-functions.js"></script>
 </head>
 <body>
-    <button onclick="ReadRfid()">Read rfid!</button>
+    <button onclick="ReadRfid()">Przeczytaj numer RFID!</button>
     <form id="soundForm" method="POST" action="/hue/upload_file" enctype="multipart/form-data">
       <p><input type="text" id="rfid_response" name="rfid_response"></p>
       <p><input type="file" name="file" accept=".mp3"></p>
@@ -14,6 +14,8 @@
     </form>
 
     <div id="sound_name"></div>
-
+    <div id="loader">
+        <img src="https://i2.wp.com/codemyui.com/wp-content/uploads/2017/09/rotate-pulsating-loading-animation.gif?fit=880%2C440&ssl=1">
+    </div>
 </body>
 </html>
