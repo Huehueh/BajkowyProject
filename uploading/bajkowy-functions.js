@@ -12,12 +12,12 @@ async function ReadRfid()
 
 window.onload = async function() {
   form = document.getElementById("soundForm");
-  form.onsubmit = function(event) {
-  event.preventDefault();
-  var data = new FormData(form)
-  let ret = await fetch('/hue/upload_file', {method: "POST", body: data});
-  rfid_text.value = await r.text();
-  console.log(r);
-  return false;
-}
+  form.onsubmit = async function(event) {
+      event.preventDefault();
+      var data = new FormData(form)
+      let ret = await fetch('/hue/upload_file', {method: "POST", body: data});
+      rfid_text.value = await r.text();
+      console.log(r);
+      return false;
+    }
 }
