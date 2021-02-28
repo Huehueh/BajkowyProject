@@ -10,7 +10,7 @@ async function ReadRfid()
     console.log(r);
 }
 
-window.onload = function() {
+window.onload = async function() {
   form = document.getElementById("soundForm");
   form.onsubmit = function(event) {
   event.preventDefault();
