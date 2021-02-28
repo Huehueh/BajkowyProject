@@ -6,9 +6,7 @@ import os
 app = Flask(__name__)
 configReader = ConfigReader()
 app.config['UPLOAD_FOLDER'] = configReader.get_sound_directory()
-app.config['UPLOAD_EXTENSIONS'] = ['.mp3']
-app.config['UPLOAD_PATH'] = 'uploads'
-app.config['MAX_CONTENT_PATH'] = 100000000
+app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024
 reader = None
 
 def init_rfid_reader():
@@ -23,16 +21,20 @@ def read_rfid():
 
 @app.route('/upload_file', methods=['POST'])
 def upload_sound():
-    uploaded_file = request.files['file']
+    if 'file' in request.files:
+        uploaded_file = request.files['file']
+        filename = uploaded_file.filename
+        if filename != '':
+            filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 
-    filepath = os.path.join(app.config['UPLOAD_FOLDER'], uploaded_file.filename)
-    print("Zapisuje plik", filepath)
-    uploaded_file.save(filepath)
+            id = request.form["rfid_response"]
+            validId = configReader.add_song(id, filename)
+            if validId:
+                print("Saving file", filepath)
+                uploaded_file.save(filepath)
 
-    id = request.form["rfid_response"]
-    print(f"Zapisuje config {id} - {uploaded_file.filename}")
-    configReader.add_song(id, uploaded_file.filename)
-    return f"Wrzucono {id} {uploaded_file.filename}"
+                return f"Wrzucono {id} {filename}"
+    return "Nie wrzucono pliku"
 
 
 if __name__ == "__main__":

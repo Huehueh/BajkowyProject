@@ -22,9 +22,16 @@ class ConfigReader:
             return self.config[SOUND_DIR]
         return None
 
-    def add_song(self, id : str, songname : str):
-        self.config[id] = songname
+    def is_id_valid(self, id : str) -> bool:
+        return id.isnumeric()
+
+    def add_song(self, rfid : str, songname : str) -> bool:
+        if not self.is_id_valid(rfid):
+            return False
+        print(f"Saving new configuration: {rfid} - {songname}")
+        self.config[rfid] = songname
         self.save_config()
+        return True
 
     def get_song_for_id(self, id : str) -> str:
         print(f"ID{id}:", end=' ')
