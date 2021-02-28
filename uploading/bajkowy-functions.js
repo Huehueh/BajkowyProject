@@ -19,7 +19,9 @@ window.onload = async function() {
 
   form.onsubmit = async function(event) {
       var data = new FormData(form);
-      if (data.rfid_response != "" && data.rfid_response != rfid_await_message)
+      var response = data.get("rfid_response")
+      console.log(response);
+      if (response != "" && response != rfid_await_message)
       {
           event.preventDefault();
           loader.style.display = "block";
