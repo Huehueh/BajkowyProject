@@ -32,6 +32,7 @@ def upload_sound():
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], uploaded_file.filename)
         print("Zapisuje plik", filepath)
         uploaded_file.save(filepath)
+        configReader.add_song(id, uploaded_file.filename)
     return f"wrzucono {uploaded_file.filename}"
 
 
