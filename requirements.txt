@@ -1,6 +1,8 @@
-wheel
-uwsgi
-flask
-mfrc522
-pymitter
-python-vlc
+Flask==1.1.2
+mfrc522==0.0.7
+pymitter==0.3.0
+python-vlc==3.0.11115
+RPi.GPIO==0.7.0
+spidev==3.5
+uWSGI==2.0.19.1
+Werkzeug==1.0.1
