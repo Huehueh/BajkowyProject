@@ -1,7 +1,7 @@
 import json, os
 
 SOUND_DIR = 'sound_directory'
-CONFIG_NAME = 'config.json'
+CONFIG_NAME = '/etc/bajkowy/config.json'
 
 class ConfigReader:
     def __init__(self):
