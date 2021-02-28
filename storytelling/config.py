@@ -10,6 +10,7 @@ class ConfigReader:
 
     def save_config(self):
         with open(CONFIG_NAME, 'w') as config_file:
+            print(f"Saving {self.config} to {config_file}")
             json.dump(self.config, config_file)
 
     def set_sound_directory(self, directory : str):
