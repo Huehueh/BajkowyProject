@@ -18,15 +18,14 @@ window.onload = async function() {
   loader.style.display = "none";
 
   form.onsubmit = async function(event) {
+      event.preventDefault();
       var data = new FormData(form);
       var response = data.get("rfid_response")
       console.log(response);
       if (response != "" && response != rfid_await_message)
       {
-          event.preventDefault();
           loader.style.display = "block";
           sound_name.innerHTML = "";
-
           let ret = await fetch('/hue/upload_file', {method: "POST", body: data});
           sound_name.innerHTML = await ret.text();
           loader.style.display = "none";
