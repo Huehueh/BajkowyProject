@@ -16,8 +16,9 @@ window.onload = async function() {
       event.preventDefault();
       var data = new FormData(form)
       let ret = await fetch('/hue/upload_file', {method: "POST", body: data});
-      rfid_text.value = await r.text();
-      console.log(r);
+      var sound_name = document.getElementById("sound_name");
+      sound_name.innerHTML = await ret.text();
+      console.log(ret);
       return false;
     }
 }
