@@ -10,8 +10,10 @@ async function ReadRfid()
     console.log(r);
 }
 
-form = document.getElementById("soundForm");
-form.onsubmit = function(event) {
-//    event.preventDefault();
-    return false;
+window.onload = function() {
+  form = document.getElementById("soundForm");
+  form.onsubmit = function(event) {
+  //    event.preventDefault();
+  return false;
+}
 }
